@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', function () {
     let products = document.querySelectorAll('.product'),
         buttons = document.querySelectorAll('button'),
-        openCart = document.querySelector('.open');
+        openBtn = document.querySelector('.open');
 
     function createCart() {
         let cart = document.createElement('div'),
@@ -22,4 +22,42 @@ window.addEventListener('DOMContentLoaded', function () {
         cart.appendChild(closeBtn);
     }
 createCart();
+// open & close cart
+    let field = document.querySelector('.cart-field'),
+        cart = document.querySelector('.cart'),
+        close = document.querySelector('.close');
+    function openCart() {
+        cart.style.display = 'block';
+    }
+    function closeCart() {
+        cart.style.display = 'none';
+    }
+
+    openBtn.addEventListener('click', openCart);
+    close.addEventListener('click', closeCart);
+
+/*    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function () {
+        //    clone tovar
+            let item = products[i].cloneNode(true);
+                //btn delete
+                btn = item.querySelector('button');
+
+                btn.remove();
+                field.appendChild(item);
+        //        del staryj elem
+                products[i].remove();
+        });
+    }*/
+
+    buttons.forEach((item, i) => {
+        item.addEventListener('click', () => {
+            let item = products[i].cloneNode(true),
+                btn = item.querySelector('button');
+
+            btn.remove();
+            field.appendChild(item);
+            products[i].remove();
+        })
+    })
 });
